@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="wpf_inz.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Height="Auto" Width="Auto"
+             SizeChanged="UserControl_SizeChanged">
+    <Grid Background="#F3F4F6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <!-- Sidebar will automatically size itself -->
+            <ColumnDefinition Width="*"/>
+            <!-- Main content takes all available space -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar Menu -->
+        <Border Grid.Column="0" Background="#FFFFFF">
+            <Grid VerticalAlignment="Stretch" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Icons Section -->
+                    <RowDefinition Height="*"/>
+                    <!-- Push Bottom Icons to the bottom -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Bottom Icons -->
+                </Grid.RowDefinitions>
+
+                <!-- Top Icons Section -->
+                <StackPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Name="SidebarStackPanel">
+                    <Button Height="70" Width="70" Background="Transparent" Margin="0,10,0,0" BorderBrush="Transparent" ToolTip="Ekran główny"
+                            Click="BackToStartView_Click">
+                        <materialDesign:PackIcon Kind="HomeOutline" Width="40" Height="40" Foreground="#007BFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Button>
+
+                    <Button Height="70" Width="70" Background="Transparent" Margin="0,10,0,0" BorderBrush="Transparent" ToolTip="Harmonogram"
+                            Click="ScheduleCalendarView">
+                        <materialDesign:PackIcon Kind="Calendar" Width="35" Height="40" Foreground="#007BFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Button>
+
+
+                    <Button Height="70" Width="70" Background="Transparent" Margin="0,10,0,0" BorderBrush="Transparent" ToolTip="Lista urządzeń"
+                            Click="ShowDeviceListView_Click">
+                        <materialDesign:PackIcon Kind="Devices" Width="35" Height="40" Foreground="#007BFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Button>
+
+                    <Button Height="70" Width="70" Background="Transparent" Margin="0,10,0,0" BorderBrush="Transparent" ToolTip="Budżet"
+                            Click="ShowBudgetView_Click">
+                        <materialDesign:PackIcon Kind="CurrencyUsd" Width="35" Height="40" Foreground="#007BFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Button>
+
+                    <!-- Logout Button with Tooltip -->
+                    <Button Height="70" Width="70" Background="Transparent" Margin="0,10,0,0" BorderBrush="Transparent"
+                            Click="LogoutButton_Click">
+                        <materialDesign:PackIcon Kind="Logout" Width="35" Height="40" Foreground="#007BFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Button.ToolTip>
+                            <ToolTip Content="Wyloguj się"/>
+                        </Button.ToolTip>
+                    </Button>
+                </StackPanel>
+
+                <!-- Bottom Section (Notification and Profile) -->
+                <StackPanel Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20,0,10">
+                    <!-- Notification Button -->
+                    <Button Height="70" Width="70" Background="Transparent" BorderBrush="Transparent" Click="OpenNotificationView_Click">
+                        <Grid>
+                            <materialDesign:PackIcon Kind="Bell" Width="40" Height="40" Foreground="#007BFF"/>
+                            <Border Background="#FF0000" CornerRadius="10" HorizontalAlignment="Right" VerticalAlignment="Top" Width="20" Height="20"
+                                    ToolTip="Powiadomienia" Visibility="{Binding NotificationCountVisibility}">
+                                <TextBlock Text="{Binding NotificationCount}" Foreground="White" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                    </Button>
+
+                    <!-- Profile Button with Initials in a Circle -->
+                    <Button Click="ProfileButton_Click" Width="80" Height="60" Background="Transparent" Margin="0,10,0,0" BorderBrush="Transparent">
+                        <Grid>
+                            <Ellipse Fill="#CCCCCC" Width="45" Height="45"/>
+                            <TextBlock Text="{Binding UserInitials}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="White" FontSize="20"
+                                       ToolTip="Zarządzanie kontem"/>
+                        </Grid>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main Content Area -->
+        <Grid Grid.Column="1" Background="#FFFFFF" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Content centered both vertically and horizontally -->
+            <ContentControl x:Name="MainContent" Background="#FFFFFF" Margin="10,0,10,6" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5"/>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="wpf_inz.DeviceListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <Grid Background="White" Margin="20">
+        <!-- Definicja wierszy: pierwszy na tabelę, drugi na przycisk -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Tabela urządzeń -->
+        <DataGrid Name="DeviceGrid"
+                  Grid.Row="0"
+                  AutoGenerateColumns="False"
+                  HeadersVisibility="Column"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  BorderThickness="0"
+                  ColumnHeaderHeight="50"
+                  RowHeight="40"
+                  AlternatingRowBackground="White"
+                  Background="White"
+                  GridLinesVisibility="None">
+            <!-- Styl nagłówków -->
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                    <Setter Property="Padding" Value="10,5"/>
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="BorderBrush" Value="#afafaf"/>
+                    <Setter Property="BorderThickness" Value="0,0,0,0.5"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+
+            <!-- Styl wierszy -->
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="SnapsToDevicePixels" Value="True"/>
+                    <Setter Property="BorderBrush" Value="#afafaf"/>
+                    <Setter Property="BorderThickness" Value="0,0,0,0.5"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                </Style>
+            </DataGrid.RowStyle>
+
+            <!-- Kolumny -->
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"
+                                    ElementStyle="{StaticResource LeftAlignedCellStyle}"/>
+                <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="*"
+                                    ElementStyle="{StaticResource LeftAlignedCellStyle}"/>
+                <DataGridTextColumn Header="Model" Binding="{Binding Model}" Width="*"
+                                    ElementStyle="{StaticResource LeftAlignedCellStyle}"/>
+                <DataGridTextColumn Header="Data Zakupu" Binding="{Binding PurchaseDate, StringFormat='{}{0:dd-MM-yyyy}'}" Width="*"
+                    ElementStyle="{StaticResource LeftAlignedCellStyle}"/>
+                <DataGridTextColumn Header="Koniec Gwarancji" Binding="{Binding WarrantyEndDate, StringFormat='{}{0:dd-MM-yyyy}'}" Width="*"
+                    ElementStyle="{StaticResource LeftAlignedCellStyle}"/>
+
+                <DataGridTemplateColumn Header="Akcje" Width="200">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <!-- Przycisk Pobierz -->
+                                <Button Width="60" Height="30" Margin="0" Background="Transparent" BorderBrush="Transparent" Click="DownloadReceiptImage_Click">
+                                    <materialDesign:PackIcon Kind="Download" Width="20" Height="20" Foreground="#28A745" />
+                                </Button>
+                                <!-- Przycisk Edytuj -->
+                                <Button Width="60" Height="30" Margin="0" Background="Transparent" BorderBrush="Transparent" Click="EditDevice_Click">
+                                    <materialDesign:PackIcon Kind="Pencil" Width="30" Height="20" Foreground="#007BFF" />
+                                </Button>
+                                <!-- Przycisk Usuń -->
+                                <Button Width="60" Height="30" Margin="0" Background="Transparent" BorderBrush="Transparent" Click="DeleteDevice_Click">
+                                    <materialDesign:PackIcon Kind="Delete" Width="20" Height="20" Foreground="#DC3545" />
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Przycisk Dodaj urządzenie -->
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="Dodaj urządzenie" Width="150" Height="40" 
+                    Background="#007BFF" Foreground="White" 
+                    FontSize="14" FontWeight="Bold" 
+                    Click="AddDevice_Click" />
+        </StackPanel>
+    </Grid>
+</UserControl>
