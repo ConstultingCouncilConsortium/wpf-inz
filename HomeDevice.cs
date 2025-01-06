@@ -17,16 +17,16 @@ namespace wpf_inz
         public string Model { get; set; }
 
         [Required]
-        public DateOnly PurchaseDate { get; set; } // Zmiana z DateTime na DateOnly
+        public DateOnly PurchaseDate { get; set; } 
 
         public int WarrantyPeriodMonths { get; set; }
 
         public byte[] ReceiptImage { get; set; }
 
-        public int UserId { get; set; } // Klucz obcy do powiązania z użytkownikiem
+        public int UserId { get; set; } 
 
         [Required]
-        public DateOnly WarrantyEndDate { get; set; } // Zmiana z DateTime na DateOnl
+        public DateOnly WarrantyEndDate { get; set; } 
         [NotMapped]
         public DateTime WarrantyEndDateTime => WarrantyEndDate.ToDateTime(new TimeOnly(0, 0));
     }

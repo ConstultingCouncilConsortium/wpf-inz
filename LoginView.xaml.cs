@@ -9,7 +9,7 @@ namespace wpf_inz
     {
         public event Action OnLoginSuccess;
         public event Action OnRegister;
-        public event Action<string> OnVerificationRequired; // Zaktualizowany delegat z parametrem
+        public event Action<string> OnVerificationRequired; 
 
 
         public LoginView()

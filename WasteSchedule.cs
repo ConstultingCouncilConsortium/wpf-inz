@@ -12,13 +12,13 @@ namespace wpf_inz
 
         [Required]
         [MaxLength(50)]
-        public string WasteType { get; set; } // Typ odpadu (np. szkło, papier, plastik, mieszane)
+        public string WasteType { get; set; } 
 
         [Required]
-        public DateTime Date { get; set; } // Data wywozu
+        public DateTime Date { get; set; } 
 
-        public int? FrequencyInDays { get; set; } // Liczba dni między wywozami (null dla jednorazowych)
+        public int? FrequencyInDays { get; set; } 
         [Required]
-        public int UserId { get; set; } // Klucz obcy do identyfikacji użytkownika
+        public int UserId { get; set; } 
     }
 }

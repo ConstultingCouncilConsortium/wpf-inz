@@ -38,17 +38,17 @@ namespace wpf_inz
             // 2) Jeżeli brak, to poszukajmy wstecz (najświeższy poprzedni)
             for (int monthsBack = 1; monthsBack <= 120; monthsBack++)
             {
-                // Liczba 120 to arbitralnie 10 lat wstecz – do ustalenia wg potrzeb
+                
                 var fallbackDate = date.AddMonths(-monthsBack);
                 var fallbackKey = (currency, fallbackDate.Year, fallbackDate.Month);
                 if (_exchangeRates.TryGetValue(fallbackKey, out var fallbackRate))
                     return fallbackRate;
             }
 
-            // 3) Jeśli dalej nic, a waluta to PLN – użyj 1.0
+           
             if (currency == "PLN") return 1.0m;
 
-            // 4) W innym razie 0 lub rzuć wyjątek – zależy co wolisz
+           
             return 0m;
         }
 
@@ -94,11 +94,11 @@ namespace wpf_inz
                 decimal total = 0;
                 foreach (var b in Budgets.Where(x => x.Category == "Przychody"))
                 {
-                    // 1) Przelicz budżet z oryginalnej waluty -> PLN
+                   
                     decimal rateToPLN = GetRateToPLN(b.Currency, b.Date);
                     decimal amountPLN = b.Amount * rateToPLN;
 
-                    // 2) PLN -> waluta wybrana (np. USD/EUR)
+                    
                     decimal amountSelected = CurrencyHelper.ConvertPLNToSelectedCurrency(amountPLN, b.Date);
                     total += amountSelected;
                 }

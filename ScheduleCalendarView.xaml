@@ -6,19 +6,19 @@
     <Grid Background="#FFFFFF">
     <!-- Main Content Area -->
     <Grid Margin="10">
-        <!-- Define rows: Header, Calendar, and Buttons -->
+        
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> <!-- Header -->
-            <RowDefinition Height="*"/>   <!-- Calendar -->
-            <RowDefinition Height="Auto"/> <!-- Action Buttons -->
+            <RowDefinition Height="Auto"/> 
+            <RowDefinition Height="*"/>   
+            <RowDefinition Height="Auto"/> 
         </Grid.RowDefinitions>
 
         <!-- Header -->
         <Grid Grid.Row="0" Margin="0,10,0,20">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />  <!-- Left empty space -->
-                <ColumnDefinition Width="Auto" /> <!-- Title -->
-                <ColumnDefinition Width="*" />  <!-- Right empty space for controls -->
+                <ColumnDefinition Width="*" /> 
+                <ColumnDefinition Width="Auto" /> 
+                <ColumnDefinition Width="*" />  
             </Grid.ColumnDefinitions>
 
             <!-- Centralized title -->
@@ -42,7 +42,7 @@
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
             <UniformGrid Name="CalendarGrid" Rows="7" Columns="7" HorizontalAlignment="Stretch" 
                          VerticalAlignment="Stretch" Background="White" Margin="0,5,0,10">
-                <!-- Content dynamically populated in code-behind -->
+                
             </UniformGrid>
         </ScrollViewer>
 

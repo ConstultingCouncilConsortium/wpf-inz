@@ -46,8 +46,8 @@ namespace wpf_inz
 
         private void AdjustSidebarButtonSize()
         {
-            double newSize = Math.Max(40, Math.Min(60, this.ActualHeight / 15)); // Adjust button size based on the window height
-            SidebarStackPanel.Tag = newSize; // Use Tag property to bind button height and width
+            double newSize = Math.Max(40, Math.Min(60, this.ActualHeight / 15)); 
+            SidebarStackPanel.Tag = newSize; 
         }
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
@@ -132,7 +132,7 @@ namespace wpf_inz
         }
         private void ShowBudgetView_Click(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = new BudgetView(); // Wyświetlenie widoku budżetu
+            MainContent.Content = new BudgetView(); 
         }
 
 

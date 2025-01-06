@@ -81,25 +81,25 @@ namespace wpf_inz
 
         private decimal GetRateToPLN(string currency, DateTime date)
         {
-            // 1) Sprawdzamy klucz exact
+            
             var keyExact = (currency, date.Year, date.Month);
             if (_exchangeRates.TryGetValue(keyExact, out var exactRate))
                 return exactRate;
 
-            // 2) Jeżeli brak, to poszukajmy wstecz (najświeższy poprzedni)
+            
             for (int monthsBack = 1; monthsBack <= 120; monthsBack++)
             {
-                // Liczba 120 to arbitralnie 10 lat wstecz – do ustalenia wg potrzeb
+               
                 var fallbackDate = date.AddMonths(-monthsBack);
                 var fallbackKey = (currency, fallbackDate.Year, fallbackDate.Month);
                 if (_exchangeRates.TryGetValue(fallbackKey, out var fallbackRate))
                     return fallbackRate;
             }
 
-            // 3) Jeśli dalej nic, a waluta to PLN – użyj 1.0
+           
             if (currency == "PLN") return 1.0m;
 
-            // 4) W innym razie 0 lub rzuć wyjątek – zależy co wolisz
+            
             return 0m;
         }
 
@@ -168,21 +168,18 @@ namespace wpf_inz
                 var startDate = new DateTime(currentDate.AddMonths(-5).Year, currentDate.AddMonths(-5).Month, 1);
                 var endDate = new DateTime(currentDate.Year, currentDate.Month, 1).AddMonths(1).AddDays(-1);
 
-                // Pobieramy dane z bazy
+                
                 var rawData = context.Budgets
                     .Where(b => b.UserId == userId && b.Date >= startDate && b.Date <= endDate)
                     .ToList();
 
-                // Najpierw dla każdej transakcji wyliczamy kwotę w wybranej walucie:
-                //   1) Kwota oryginalna => PLN
-                //   2) PLN => Session.SelectedCurrency
                 var convertedData = rawData.Select(b =>
                 {
-                    // A) Oryginalna waluta -> PLN
+                   
                     decimal ratePln = GetRateToPLN(b.Currency, b.Date);
                     double amountPln = (double)(b.Amount * ratePln);
 
-                    // B) PLN -> docelowa waluta (jeżeli Session.SelectedCurrency != "PLN")
+                    
                     double finalAmount = 0.0;
                     if (Session.SelectedCurrency == "PLN")
                     {
@@ -202,8 +199,7 @@ namespace wpf_inz
                     };
                 }).ToList();
 
-                // Teraz w zależności od wybranej kategorii (Wydatki, Przychody, Bilans)
-                // grupujemy po (Rok, Miesiąc) i sumujemy 'AmountInSelected'.
+              
                 IEnumerable<dynamic> filteredData;
 
                 if (SelectedCategory == "Wydatki")
@@ -231,9 +227,7 @@ namespace wpf_inz
                 }
                 else // Bilans
                 {
-                    // Dla bilansu: Przychody - Wydatki w docelowej walucie
-                    // W tym celu możemy analogicznie rozdzielić transakcje na "Koszty" i "Przychody"
-                    // i potem je odjąć
+
 
                     var expensesDict = convertedData
                         .Where(x => x.Category == "Koszty")
@@ -267,8 +261,7 @@ namespace wpf_inz
                     });
                 }
 
-                // Tworzymy "fullData" na kolejne 6 miesięcy (od startDate do startDate+5m)
-                // i dołączamy sumy z 'filteredData'.
+
                 var fullData = Enumerable.Range(0, 6).Select(i =>
                 {
                     var date = startDate.AddMonths(i);
@@ -396,8 +389,8 @@ namespace wpf_inz
                 // Filtrowanie danych w pamięci
                 var warrantyData = devices
                     .Where(device =>
-                        device.WarrantyEndDateTime >= today && // Gwarancja kończy się po dzisiejszej dacie
-                        device.WarrantyEndDateTime <= upcomingWarrantyEnd) // Gwarancja kończy się w ciągu 6 miesięcy
+                        device.WarrantyEndDateTime >= today && 
+                        device.WarrantyEndDateTime <= upcomingWarrantyEnd) 
                     .Select(device => new
                     {
                         Name = device.Name,
@@ -443,13 +436,13 @@ namespace wpf_inz
         {
             if (CurrencyComboBox.SelectedItem is ComboBoxItem item)
             {
-                // 3) Zapisz do Session i odśwież wykres + KPI
-                Session.SelectedCurrency = item.Content.ToString(); // np. "USD" / "EUR" / "PLN"
+                
+                Session.SelectedCurrency = item.Content.ToString(); 
 
                 // Odśwież wykres
                 GenerateExpensesReport();
 
-                // Odśwież KPI (jeśli wybrano jakiś miesiąc)
+               
                 if (FirstMonthSelector.SelectedItem is string selectedMonth)
                     CalculateKPI(selectedMonth);
             }
@@ -462,22 +455,22 @@ namespace wpf_inz
             {
                 var userId = Session.CurrentUser?.Id ?? 0;
 
-                // Pobierz wszystkie dane tego użytkownika
+                
                 var allData = context.Budgets
                     .Where(b => b.UserId == userId)
                     .ToList();
 
-                // Rozbij "MM/yyyy"
+                
                 var selectedDateParts = selectedMonth.Split('/');
                 int selectedMonthNumber = int.Parse(selectedDateParts[0]);
                 int selectedYear = int.Parse(selectedDateParts[1]);
 
-                // Poprzedni miesiąc
+                
                 var previousMonthDate = new DateTime(selectedYear, selectedMonthNumber, 1).AddMonths(-1);
                 int previousMonthNumber = previousMonthDate.Month;
                 int previousYear = previousMonthDate.Year;
 
-                // 1) Wyfiltruj transakcje z wybranego miesiąca i poprzedniego
+                
                 var selectedData = allData
                     .Where(b => b.Date.Year == selectedYear && b.Date.Month == selectedMonthNumber)
                     .ToList();
@@ -486,15 +479,14 @@ namespace wpf_inz
                     .Where(b => b.Date.Year == previousYear && b.Date.Month == previousMonthNumber)
                     .ToList();
 
-                // 2) Przeliczamy wszystkie transakcje w each z tych list na Session.SelectedCurrency
-                //    identycznie jak w GenerateExpensesReport (A -> PLN -> docelowa).
+                
                 double ConvertToSelected(Budget b)
                 {
-                    // A) Oryginalna waluta -> PLN
+                   
                     decimal ratePln = GetRateToPLN(b.Currency, b.Date);
                     double amountPln = (double)(b.Amount * ratePln);
 
-                    // B) PLN -> docelowa
+                   
                     if (Session.SelectedCurrency == "PLN") return amountPln;
 
                     decimal targetRate = GetRateToPLN(Session.SelectedCurrency, b.Date);
@@ -517,11 +509,11 @@ namespace wpf_inz
                     .Where(b => b.Category == "Koszty")
                     .Sum(b => ConvertToSelected(b));
 
-                // Bilans
+               
                 double selectedBalance = selectedIncome - selectedExpense;
                 double previousBalance = previousIncome - previousExpense;
 
-                // Zmiany
+               
                 double incomeChange = selectedIncome - previousIncome;
                 double expenseChange = selectedExpense - previousExpense;
                 double balanceChange = selectedBalance - previousBalance;
@@ -530,13 +522,11 @@ namespace wpf_inz
                 double expensePercentChange = (previousExpense == 0) ? 0 : (expenseChange / previousExpense) * 100;
                 double balancePercentChange = (previousBalance == 0) ? 0 : (balanceChange / Math.Abs(previousBalance)) * 100;
 
-                // 3) Wyświetlanie tekstu w docelowej walucie
-                //    np. "200,00 USD (+100,0, 50,0%)"
+              
                 IncomeChangeText.Text = $"{selectedIncome:N2} {Session.SelectedCurrency} ({incomeChange:+0.0;-0.0;0.0}, {incomePercentChange:+0.0;-0.0;0.0}%)";
                 ExpenseChangeText.Text = $"{selectedExpense:N2} {Session.SelectedCurrency} ({expenseChange:+0.0;-0.0;0.0}, {expensePercentChange:+0.0;-0.0;0.0}%)";
                 BalanceChangeText.Text = $"{selectedBalance:N2} {Session.SelectedCurrency} ({balanceChange:+0.0;-0.0;0.0}, {balancePercentChange:+0.0;-0.0;0.0}%)";
 
-                // 4) Kolory
                 IncomeChangeText.Foreground = Brushes.Black;
                 ExpenseChangeText.Foreground = Brushes.Black;
                 BalanceChangeText.Foreground = Brushes.Black;

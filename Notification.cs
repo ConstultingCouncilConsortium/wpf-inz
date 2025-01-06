@@ -15,18 +15,18 @@ namespace wpf_inz
         public int Id { get; set; }
 
         [Required]
-        public int UnifiedEventId { get; set; } // Powiązanie z UnifiedEvent
+        public int UnifiedEventId { get; set; } 
 
         [Required]
-        public int UserId { get; set; } // Powiązanie z użytkownikiem
+        public int UserId { get; set; } 
 
         [Required]
-        public string Message { get; set; } // Treść powiadomienia
+        public string Message { get; set; }
 
         [Required]
-        public bool IsRead { get; set; } = false; // Czy powiadomienie zostało przeczytane
+        public bool IsRead { get; set; } = false; 
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now; // Data utworzenia
+        public DateTime CreatedAt { get; set; } = DateTime.Now; 
     }
 
 }

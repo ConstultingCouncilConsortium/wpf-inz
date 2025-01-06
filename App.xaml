@@ -11,13 +11,13 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <local:BudgetToSelectedCurrencyConverter x:Key="BudgetToSelectedCurrencyConverter" />
-            <!-- Twój istniejący styl TextBlock -->
+            
             <Style x:Key="LeftAlignedCellStyle" TargetType="TextBlock">
                 <Setter Property="Padding" Value="10,0"/>
                 <Setter Property="TextAlignment" Value="Left"/>
             </Style>
 
-            <!-- ToggleButton Style -->
+           
             <Style x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
                 <Setter Property="Template">
                     <Setter.Value>
@@ -33,7 +33,7 @@
                 </Setter>
             </Style>
 
-            <!-- Twój styl ToolTip -->
+            
             <Style TargetType="ToolTip">
                 <Setter Property="OverridesDefaultStyle" Value="True" />
                 <Setter Property="Background" Value="#49A4FC" />

@@ -26,7 +26,6 @@ namespace wpf_inz
                 WarrantyPeriodTextBox.Text = device.WarrantyPeriodMonths.ToString();
                 receiptPath = device.ReceiptImage;
 
-                // Dodajemy diagnostykę, aby sprawdzić, czy `receiptPath` ma dane
                 if (receiptPath != null && receiptPath.Length > 0)
                 {
                     Console.WriteLine("Obraz jest dostępny, długość byte[]: " + receiptPath.Length);
@@ -98,9 +97,7 @@ namespace wpf_inz
                 PurchaseDateError.Visibility = Visibility.Collapsed;
             }
 
-            // Okres gwarancji
-            // Okres gwarancji
-            // Okres gwarancji
+
             if (string.IsNullOrWhiteSpace(WarrantyPeriodTextBox.Text) || !int.TryParse(WarrantyPeriodTextBox.Text, out warrantyMonths) || warrantyMonths <= 0)
             {
                 WarrantyPeriodError.Text = "Okres gwarancji jest wymagany i musi być liczbą dodatnią.";
@@ -182,7 +179,7 @@ namespace wpf_inz
 
             if (openFileDialog.ShowDialog() == true)
             {
-                receiptPath = ConvertImageToByteArray(openFileDialog.FileName); // Wczytanie obrazu do `byte[]`
+                receiptPath = ConvertImageToByteArray(openFileDialog.FileName); 
                 ReceiptImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
                 ReceiptImage.Visibility = Visibility.Visible;
             }
@@ -203,7 +200,7 @@ namespace wpf_inz
                     image.CacheOption = BitmapCacheOption.OnLoad;
                     image.StreamSource = stream;
                     image.EndInit();
-                    image.Freeze(); // Zabezpiecz obraz, aby można było go bezpiecznie używać w wątkach UI
+                    image.Freeze(); 
                     return image;
                 }
             }
@@ -221,8 +218,8 @@ namespace wpf_inz
         {
             var mainWindow = (MainWindow)Application.Current.MainWindow;
             var homeView = new HomeView();
-            homeView.MainContent.Content = new DeviceListView(); // Osadzamy DeviceListView w HomeView
-            mainWindow.MainContent.Content = homeView; // Ustawiamy HomeView jako główny widok
+            homeView.MainContent.Content = new DeviceListView(); 
+            mainWindow.MainContent.Content = homeView;
         }
 
         // Obsługa zdarzenia LostFocus dla DeviceNameTextBox

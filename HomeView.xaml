@@ -7,9 +7,9 @@
     <Grid Background="#F3F4F6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
-            <!-- Sidebar will automatically size itself -->
+            
             <ColumnDefinition Width="*"/>
-            <!-- Main content takes all available space -->
+            
         </Grid.ColumnDefinitions>
 
         <!-- Sidebar Menu -->
@@ -57,7 +57,7 @@
                     </Button>
                 </StackPanel>
 
-                <!-- Bottom Section (Notification and Profile) -->
+                <!-- Bottom Section  -->
                 <StackPanel Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20,0,10">
                     <!-- Notification Button -->
                     <Button Height="70" Width="70" Background="Transparent" BorderBrush="Transparent" Click="OpenNotificationView_Click">

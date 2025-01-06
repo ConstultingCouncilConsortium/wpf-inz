@@ -257,20 +257,12 @@ namespace wpf_inz
                         stackPanel.Children.Add(eventGrid);
                     }
 
-
-
-
-
-
-
-
-                    // Ustawienie StackPanel jako zawartości ScrollViewer
                     scrollViewer.Content = stackPanel;
 
-                    // Ustawienie ScrollViewer jako zawartości Border
+                   
                     border.Child = scrollViewer;
 
-                    // Dodanie Border do siatki kalendarza
+                    
                     CalendarGrid.Children.Add(border);
                 }
             }
@@ -306,9 +298,9 @@ namespace wpf_inz
 
         private void DeleteEvent_Click(object sender, RoutedEventArgs e)
         {
-            // Retrieve the event object from the button's Tag property
+            
             var button = sender as Button;
-            var unifiedEvent = button?.Tag as UnifiedEvent; // UnifiedEvent represents a record in the UnifiedEvents table
+            var unifiedEvent = button?.Tag as UnifiedEvent;
 
             if (unifiedEvent != null)
             {
@@ -400,19 +392,19 @@ namespace wpf_inz
         {
             var mainWindow = (MainWindow)Application.Current.MainWindow;
             var homeView = new HomeView();
-            homeView.MainContent.Content = new GeneralNotesView(); // Osadzamy DeviceListView w HomeView
-            mainWindow.MainContent.Content = homeView; // Ustawiamy HomeView jako główny widok
-            // Po zamknięciu okna odśwież kalendarz, aby uwzględnić nowe notatki
+            homeView.MainContent.Content = new GeneralNotesView(); 
+            mainWindow.MainContent.Content = homeView; 
+            
             PopulateCalendar();
         }
         private void AddConfirmedAppointment_Click(object sender, RoutedEventArgs e)
         {
             var mainWindow = (MainWindow)Application.Current.MainWindow;
             var homeView = new HomeView();
-            homeView.MainContent.Content = new ConfirmedAppointmentsView(); // Osadzamy DeviceListView w HomeView
-            mainWindow.MainContent.Content = homeView; // Ustawiamy HomeView jako główny widok
+            homeView.MainContent.Content = new ConfirmedAppointmentsView(); 
+            mainWindow.MainContent.Content = homeView; 
 
-            // Po zamknięciu okna odśwież kalendarz, aby uwzględnić nowe przeglądy
+            
             PopulateCalendar();
         }
 
@@ -422,10 +414,10 @@ namespace wpf_inz
         {
             var mainWindow = (MainWindow)Application.Current.MainWindow;
             var homeView = new HomeView();
-            homeView.MainContent.Content = new WasteScheduleView(); // Osadzamy DeviceListView w HomeView
+            homeView.MainContent.Content = new WasteScheduleView(); 
             mainWindow.MainContent.Content = homeView;
 
-            // Po zamknięciu okna odśwież kalendarz
+            
             PopulateCalendar();
         }
 

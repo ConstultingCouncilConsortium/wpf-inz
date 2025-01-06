@@ -43,7 +43,7 @@ namespace wpf_inz
                 };
 
                 context.WasteSchedules.Add(wasteSchedule);
-                context.SaveChanges(); // Save to get the ID of the newly created WasteSchedule
+                context.SaveChanges(); 
 
                 // Dodanie do UnifiedEvents
                 var unifiedEvent = new UnifiedEvent
@@ -70,7 +70,7 @@ namespace wpf_inz
                         };
 
                         context.WasteSchedules.Add(recurringSchedule);
-                        context.SaveChanges(); // Save to get the ID of the recurring WasteSchedule
+                        context.SaveChanges(); 
 
                         // Dodanie do UnifiedEvents
                         var recurringUnifiedEvent = new UnifiedEvent
@@ -89,19 +89,19 @@ namespace wpf_inz
 
             var mainWindow = (MainWindow)Application.Current.MainWindow;
             var homeView = new HomeView();
-            homeView.MainContent.Content = new ScheduleCalendarView(); // Osadzamy DeviceListView w HomeView
-            mainWindow.MainContent.Content = homeView; // Ustawiamy HomeView jako główny widok
-                                                       // Po zamknięciu okna odśwież kalendarz, aby uwzględnić nowe notatki
+            homeView.MainContent.Content = new ScheduleCalendarView(); 
+            mainWindow.MainContent.Content = homeView; 
+                                                       
             ((MainWindow)Application.Current.MainWindow).ShowNotification("Harmonogram wywozu śmieci został dodany!", "success");
         }
 
-        // Obsługa kliknięcia przycisku "Powrót"
+        
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             var mainWindow = (MainWindow)Application.Current.MainWindow;
             var homeView = new HomeView();
-            homeView.MainContent.Content = new ScheduleCalendarView(); // Osadzamy DeviceListView w HomeView
-            mainWindow.MainContent.Content = homeView; // Ustawiamy HomeView jako główny widok
+            homeView.MainContent.Content = new ScheduleCalendarView(); 
+            mainWindow.MainContent.Content = homeView; 
         }
 
 

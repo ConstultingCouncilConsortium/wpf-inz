@@ -40,14 +40,14 @@ namespace wpf_inz
 
             modelBuilder.Entity<HomeDevice>()
                 .Property(hd => hd.PurchaseDate)
-                .HasConversion<DateOnlyConverter, DateOnlyComparer>(); // Obsługa DateOnly
+                .HasConversion<DateOnlyConverter, DateOnlyComparer>(); 
 
             modelBuilder.Entity<HomeDevice>()
                 .Property(hd => hd.WarrantyEndDate)
-                .HasConversion<DateOnlyConverter, DateOnlyComparer>(); // Obsługa DateOnly
+                .HasConversion<DateOnlyConverter, DateOnlyComparer>(); 
             modelBuilder.Entity<HomeDevice>()
            .Property(hd => hd.ReceiptImage)
-           .HasColumnType("LONGBLOB"); // Upewnij się, że typ kolumny jest odpowiedni do przechowywania dużych obrazów
+           .HasColumnType("LONGBLOB"); 
             modelBuilder.Entity<Budget>()
         .HasKey(b => b.Id);
 

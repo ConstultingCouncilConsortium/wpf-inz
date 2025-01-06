@@ -10,13 +10,13 @@ namespace wpf_inz
 
         [Required]
         [MaxLength(10)]
-        public string Currency { get; set; } // np. "USD", "EUR", "PLN"
+        public string Currency { get; set; } 
 
         [Required]
-        public int Year { get; set; }  // Np. 2024
+        public int Year { get; set; }  
 
         [Required]
-        public int Month { get; set; } // 1 - 12
+        public int Month { get; set; } 
 
         [Required]
         [Column(TypeName = "decimal(18,4)")]

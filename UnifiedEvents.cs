@@ -12,14 +12,14 @@ namespace wpf_inz
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; } // Primary key for UnifiedEvent
+        public int Id { get; set; } 
 
         [Required]
-        public int ReferenceId { get; set; } // ID of the related entry in its respective table
+        public int ReferenceId { get; set; } 
 
         [Required]
         [MaxLength(50)]
-        public string EventType { get; set; } // Type of the event (e.g., "WasteSchedule", "GeneralNote", etc.)
+        public string EventType { get; set; } 
     }
 
 }

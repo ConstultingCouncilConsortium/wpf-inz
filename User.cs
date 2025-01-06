@@ -19,7 +19,7 @@ namespace wpf_inz
         public string Username { get; set; }
 
         [Required]
-        public string PasswordHash { get; set; } // Zaszyfrowane hasło
+        public string PasswordHash { get; set; } 
 
         [Required]
         [EmailAddress]

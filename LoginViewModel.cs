@@ -29,7 +29,7 @@ namespace wpf_inz
                 {
                     if (!user.IsEmailVerified)
                     {
-                        return 2; // Poprawne dane logowania, ale brak weryfikacji
+                        return 2; // Poprawne dane logowania brak weryfikacji
                     }
                     return 1; // Poprawne dane logowania i zweryfikowany użytkownik
                 }

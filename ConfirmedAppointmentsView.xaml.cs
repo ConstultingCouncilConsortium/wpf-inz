@@ -20,7 +20,7 @@ namespace wpf_inz
             for (int hour = 0; hour < 24; hour++)
                 HoursComboBox.Items.Add(hour.ToString("D2"));
 
-            // Dodaj minuty (co 15 minut)
+            // Dodaj minuty 
             MinutesComboBox.Items.Add("00");
             MinutesComboBox.Items.Add("15");
             MinutesComboBox.Items.Add("30");

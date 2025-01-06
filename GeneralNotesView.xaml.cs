@@ -13,11 +13,11 @@ namespace wpf_inz
 
         private void AddNoteButton_Click(object sender, RoutedEventArgs e)
         {
-            // Retrieve values from input fields
+            
             string noteText = NoteTextBox.Text;
             DateTime? selectedDate = NoteDatePicker.SelectedDate;
 
-            // Validate input data
+            
             if (string.IsNullOrWhiteSpace(noteText))
             {
                 ((MainWindow)Application.Current.MainWindow).ShowNotification("Treść notatki nie może być pusta.", "error");
@@ -30,10 +30,10 @@ namespace wpf_inz
                 return;
             }
 
-            // Add note to database
+            
             using (var context = new ApplicationDbContext())
             {
-                // Create the GeneralNote entry
+               
                 var newNote = new GeneralNote
                 {
                     Note = noteText,
@@ -59,13 +59,13 @@ namespace wpf_inz
             NoteTextBox.Clear();
             NoteDatePicker.SelectedDate = null;
 
-            // Navigate back to the home view and show success notification
+           
             ReturnToHomeView("Notatka została dodana pomyślnie.", "success");
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            // Navigate back to the home view
+            
             ReturnToHomeView();
         }
 
@@ -76,7 +76,7 @@ namespace wpf_inz
             homeView.MainContent.Content = new ScheduleCalendarView(); // Embed ScheduleCalendarView in HomeView
             mainWindow.MainContent.Content = homeView;
 
-            // Show notification if provided
+            
             if (!string.IsNullOrEmpty(message) && !string.IsNullOrEmpty(messageType))
             {
                 mainWindow.ShowNotification(message, messageType);

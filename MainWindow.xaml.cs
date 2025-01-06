@@ -17,7 +17,7 @@ namespace wpf_inz
             string projectPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName);
             string iconPath = Path.Combine(projectPath, "Resources", "AppIcon.ico");
             _notificationTimer = new DispatcherTimer();
-            _notificationTimer.Interval = TimeSpan.FromSeconds(3); // Powiadomienie widoczne przez 3 sekundy
+            _notificationTimer.Interval = TimeSpan.FromSeconds(3); 
             _notificationTimer.Tick += (s, e) =>
             {
                 NotificationPanel.Visibility = Visibility.Collapsed;
@@ -40,13 +40,13 @@ namespace wpf_inz
             switch (type.ToLower())
             {
                 case "error":
-                    NotificationPanel.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#DC3545")); // Red color for errors
+                    NotificationPanel.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#DC3545")); 
                     break;
                 case "warning":
-                    NotificationPanel.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFC107")); // Yellow color for warnings
+                    NotificationPanel.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFC107")); 
                     break;
                 default:
-                    NotificationPanel.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#28A745")); // Green color for success
+                    NotificationPanel.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#28A745")); 
                     break;
             }
 

@@ -12,23 +12,23 @@ namespace wpf_inz
 
         [Required]
         [MaxLength(100)]
-        public string EventType { get; set; } // Typ wydarzenia (np. techniczny, gazowy, spotkanie, inne)
+        public string EventType { get; set; } 
 
         [Required]
-        public DateTime Date { get; set; } // Data wydarzenia
+        public DateTime Date { get; set; } 
 
-        public TimeSpan? Time { get; set; } // Opcjonalna godzina wydarzenia
+        public TimeSpan? Time { get; set; } 
 
         [MaxLength(255)]
-        public string Note { get; set; } // Opis wydarzenia
+        public string Note { get; set; } 
 
         [MaxLength(100)]
-        public string ContactName { get; set; } // Opcjonalne: imię i nazwisko osoby kontaktowej
+        public string ContactName { get; set; } 
 
         [MaxLength(15)]
-        public string ContactPhone { get; set; } // Opcjonalne: numer telefonu osoby kontaktowej
+        public string ContactPhone { get; set; } 
 
         [Required]
-        public int UserId { get; set; } // Klucz obcy identyfikujący użytkownika
+        public int UserId { get; set; } 
     }
 }
